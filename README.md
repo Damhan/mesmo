@@ -10,4 +10,4 @@ MERN stack application that manages basic office administration for small compan
     mongoUri: YOURMONGO URI HERE
 }
 * npm client-install | npm install
-*npm start | npm start client
+* npm start | npm start client
