@@ -9,5 +9,5 @@ MERN stack application that manages basic office administration for small compan
 * Add the following: module.exports = {
     mongoUri: YOURMONGO URI HERE
 }
-* npm install
-*npm start
+* npm client-install | npm install
+*npm start | npm start client
