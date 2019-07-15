@@ -32,20 +32,20 @@ class UserList extends Component {
                     <TransitionGroup className="userList">
                         {users.map(({id, email}) => (
                             <CSSTransition key={id} timeout={500} classNames="fade">
-                                <ListGroup>
+                                <ListGroupItem>
                                     <Button
                                         className="remove-btn"
                                         variant="danger"
                                         size="sm"
                                         onClick={() => {
-                                            this.setState(state => {
-                                                items: state.users.filter(user => user.id != id)
-                                            });
+                                            this.setState(state => ({
+                                                users: state.users.filter(user => user.id != id)
+                                            }));
                                         }}
                                     >&times;</Button>
                                     {email}
                                     
-                                </ListGroup>
+                                </ListGroupItem>
                             </CSSTransition>
                     ))}
                     </TransitionGroup>
