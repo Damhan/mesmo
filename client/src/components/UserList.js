@@ -1,33 +1,24 @@
 import React, {Component} from 'react';
 import {Container, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
-import uuid from 'uuid';
+import {connect} from 'react-redux';
+import { getUsers, delUser } from './../actions/userActions';
+import PropTypes from 'prop-types';
 
 class UserList extends Component {
-    state = {
-        users: [
-            {id: uuid(), email: 'damhanrichardson@gmail.com'},
-            {id: uuid(), email: 'damhansalt@gmail.com'},
-            {id: uuid(), email: 'danklootthrowaway@gmail.com'}
-        ]
+
+    componentDidMount() {
+        this.props.getUsers();
+    }
+
+    onDelClick = (id) => {
+        this.props.delUser(id);
     }
 
     render() {
-        const {users} = this.state
+        const { users } = this.props.user;
         return(
             <Container>
-                <Button 
-                    className="btn-dark"
-                    style={{marginTop: '2rem'}}
-                    onClick={() => {
-                        const user = prompt("Enter name")
-                        if(user) {
-                            this.setState(state=> ({
-                                users: [...state.users, {id: uuid(), email:user}]
-                            }))
-                        }
-                    }}
-                >Add User</Button>
                 <ListGroup>
                     <TransitionGroup className="userList">
                         {users.map(({id, email}) => (
@@ -37,11 +28,7 @@ class UserList extends Component {
                                         className="remove-btn"
                                         variant="danger"
                                         size="sm"
-                                        onClick={() => {
-                                            this.setState(state => ({
-                                                users: state.users.filter(user => user.id != id)
-                                            }));
-                                        }}
+                                        onClick={this.onDelClick.bind(this,id)}
                                     >&times;</Button>
                                     {email}
                                     
@@ -55,4 +42,15 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
+UserList.propTypes = {
+    getUsers: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    user:state.user
+})
+
+export default connect(mapStateToProps,
+     { getUsers, delUser }
+     )(UserList);
