@@ -1,4 +1,4 @@
-import React, {component} from 'react';
+import React from 'react';
 import {
     Button,
     Modal,
@@ -7,7 +7,6 @@ import {
 } from 'react-bootstrap'
 import {connect} from 'react-redux';
 import {addUser} from '../actions/userActions';
-import uuid from 'uuid';
 
 class signupModal extends React.Component {
     state= {
@@ -31,7 +30,6 @@ class signupModal extends React.Component {
         e.preventDefault();
         
         const newUser = {
-            id:uuid(),
             email:this.state.email,
             password:this.state.password
         }

@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {
-    Collapse,
     Navbar,
-    NavbarBrand,
     Nav,
-    NavLink,
-    NavToggle
 } from 'react-bootstrap'
 
 class NavBar extends Component {

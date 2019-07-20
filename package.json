@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "client-install": "npm install --prefix client"
+    "client-install": "npm install --prefix client" ,
+    "aws-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Damhan Richardson",
   "license": "MIT",

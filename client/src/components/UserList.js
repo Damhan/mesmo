@@ -21,14 +21,14 @@ class UserList extends Component {
             <Container>
                 <ListGroup>
                     <TransitionGroup className="userList">
-                        {users.map(({id, email}) => (
-                            <CSSTransition key={id} timeout={500} classNames="fade">
+                        {users.map(({_id, email}) => (
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Button
                                         className="remove-btn"
                                         variant="danger"
                                         size="sm"
-                                        onClick={this.onDelClick.bind(this,id)}
+                                        onClick={this.onDelClick.bind(this,_id)}
                                     >&times;</Button>
                                     {email}
                                     
