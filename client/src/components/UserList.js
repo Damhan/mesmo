@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Container, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import {connect} from 'react-redux';
-import { getUsers, delUser } from './../actions/userActions';
+import { getUsers, delUser} from './../actions/userActions';
 import PropTypes from 'prop-types';
 
 class UserList extends Component {

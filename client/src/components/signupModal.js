@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap'
 import {connect} from 'react-redux';
 import {addUser} from '../actions/userActions';
+import uuid from 'uuid';
 
 class signupModal extends React.Component {
     state= {
@@ -22,7 +23,22 @@ class signupModal extends React.Component {
     }
 
     onChange = e => {
-        this.setState({[e.target.email] : e.target.value , [e.target.password] : e.target.password})
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+
+    onSubmit = e => {
+        e.preventDefault();
+        
+        const newUser = {
+            id:uuid(),
+            email:this.state.email,
+            password:this.state.password
+        }
+
+        this.props.addUser(newUser)
+
+        this.toggle()
     }
 
     render() {
@@ -36,31 +52,39 @@ class signupModal extends React.Component {
                 </Button>
 
             <Modal
-                isOpen={this.state.modal}
-                toggle={this.toggle}>
+                show={this.state.modal}
+                onHide={this.toggle}
+                >
+                
 
-                <Modal.Header 
-                    toggle={this.toggle}>
+                <Modal.Header
+                    closeButton>
                     Add to Users
 
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={this.onSubmit}>
                         <FormGroup>
-                            <label for="email">email</label>
+                            <label for="email">Email</label>
                             <input
                                 type="text"
                                 name="email"
                                 id="email"
                                 placeholders="Add User Item"
                                 onChange={this.onChange}/>
-
+                            <label for="password">Password:</label>
                             <input 
                                 type="text"
-                                name="pass"
-                                id="pass"
+                                name="password"
+                                id="password"
                                 placeholders="password"
                                 onChange={this.onChange}/>
+                            <Button
+                                color="dark"
+                                style={{marginTop:'2rem'}}
+                                type="submit"
+                                block
+                                >Add User</Button>
                         </FormGroup>
                     </Form>
                 </Modal.Body>
@@ -72,5 +96,10 @@ class signupModal extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    user:state.user
+})
 
-export default connect()(signupModal)
+
+
+export default connect(mapStateToProps, {addUser})(signupModal)
