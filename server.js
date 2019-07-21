@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //db setup
-const db = require('./config/keys').mongoUri;
+const db = process.env.mongoUri
 
 //coneec to mongo 
 mongoose.connect(db,{useNewUrlParser:true}).then(
